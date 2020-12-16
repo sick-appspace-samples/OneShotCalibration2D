@@ -33,7 +33,7 @@
 local DELAY = 2000
 
 -- Creating viewer
-local viewer = View.create()
+local viewer = View.create("viewer2D1")
 
 -- Text decoration object to display some feedback
 local text = View.TextDecoration.create()
