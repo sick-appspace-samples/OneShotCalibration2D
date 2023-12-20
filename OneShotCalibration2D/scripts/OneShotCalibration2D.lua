@@ -5,22 +5,22 @@
 local DELAY = 2000
 
 -- Creating viewer
-local viewer = View.create("viewer2D1")
+local viewer = View.create()
 
 -- Text decoration object to display some feedback
-local text = View.TextDecoration.create()
-text:setColor(0, 255, 0)
+local text = View.TextDecoration.create():setColor(0, 255, 0)
 text:setPosition(25, 50) -- In pixels before origin is set in world coord
 text:setSize(40) -- In pixels before sizes are defined in mm
 
 --End of Global Scope-----------------------------------------------------------
 
 --Start of Function and Event Scope---------------------------------------------
+
 local function main()
   local checkerBoard = Image.load('resources/pose.bmp') -- Calibration target
   viewer:clear()
-  local imid = viewer:addImage(checkerBoard)
-  viewer:addText('Input image', text, nil, imid)
+  viewer:addImage(checkerBoard)
+  viewer:addText('Input image', text)
   viewer:present()
   Script.sleep(DELAY) -- For demonstration purpose only
 
@@ -36,8 +36,8 @@ local function main()
   correction:setUndistortMode(cameraModel, 'VALID') -- Only intrinsic parameters, and crop to inner (no black bars)
   local correctedImage = correction:apply(checkerBoard)
   viewer:clear()
-  imid = viewer:addImage(correctedImage)
-  viewer:addText('Undistort mode', text, nil, imid)
+  viewer:addImage(correctedImage)
+  viewer:addText('Undistort mode', text)
   viewer:present()
   Script.sleep(DELAY) -- For demonstration purpose only
 
@@ -51,8 +51,8 @@ local function main()
 
   -- Display results
   viewer:clear()
-  imid = viewer:addImage(correctedImage)
-  viewer:addText('Untilt mode', text, nil, imid)
+  viewer:addImage(correctedImage)
+  viewer:addText('Untilt mode', text)
   viewer:present()
   Script.sleep(DELAY) -- For demonstration purpose only
 
@@ -63,8 +63,8 @@ local function main()
   correction:setAlignMode(cameraModel, worldRectangle)
   correctedImage = correction:apply(checkerBoard)
 
-  imid = viewer:addImage(correctedImage)
-  viewer:addText('Align mode', text, nil, imid)
+  viewer:addImage(correctedImage)
+  viewer:addText('Align mode', text)
   viewer:present()
 
   print('App finished.')
